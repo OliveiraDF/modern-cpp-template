@@ -19,6 +19,8 @@ else()
 	include(cmake/unix.cmake)
 endif()
 
+include(cmake/uncrustify.cmake)
+
 project(${PROJECT_NAME} 
 	LANGUAGES CXX
 	DESCRIPTION ${PROJECT_DESCRIPTION}

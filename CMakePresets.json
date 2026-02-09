@@ -39,7 +39,7 @@
     },
     {
       "name": "msvc-release",
-      "displayName": "MSVC Release",
+      "displayName": "MSVC Release Configuration",
       "inherits": "msvc-base",
       "cacheVariables": {
           "CMAKE_BUILD_TYPE": "Release"
@@ -47,7 +47,7 @@
     },
     {
       "name": "msvc-debug",
-      "displayName": "MSVC Debug",
+      "displayName": "MSVC Debug Configuration",
       "inherits": "msvc-base",
       "cacheVariables": {
           "CMAKE_BUILD_TYPE": "Debug"
@@ -55,7 +55,7 @@
     },
     {
       "name": "gcc-release",
-      "displayName": "GCC Release",
+      "displayName": "GCC Release Configuration",
       "inherits": "gcc-base",
       "cacheVariables": {
           "CMAKE_BUILD_TYPE": "Release"
@@ -63,7 +63,7 @@
     },
     {
       "name": "gcc-debug",
-      "displayName": "GCC Debug",
+      "displayName": "GCC Debug Configuration",
       "inherits": "gcc-base",
       "cacheVariables": {
           "CMAKE_BUILD_TYPE": "Debug"
@@ -73,19 +73,57 @@
   "buildPresets": [
     {
       "name": "msvc-release",
+      "displayName": "MSVC Release Build",
       "configurePreset": "msvc-release"
     },
     {
       "name": "msvc-debug",
+      "displayName": "MSVC Debug Build",
       "configurePreset": "msvc-debug"
     },
     {
       "name": "gcc-release",
+      "displayName": "GCC Release Build",
       "configurePreset": "gcc-release"
     },
     {
       "name": "gcc-debug",
+      "displayName": "GCC Debug Build",
       "configurePreset": "gcc-debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "msvc-release",
+      "displayName": "MSVC Release Tests",
+      "configurePreset": "msvc-release",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "msvc-debug",
+      "displayName": "MSVC Debug Tests",
+      "configurePreset": "msvc-debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "gcc-release",
+      "displayName": "GCC Release Tests",
+      "configurePreset": "gcc-release",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "gcc-debug",
+      "displayName": "GCC Debug Tests",
+      "configurePreset": "gcc-debug",
+      "output": {
+        "outputOnFailure": true
+      }
     }
   ],
   "workflowPresets": [
@@ -99,6 +137,10 @@
         },
         {
           "type": "build",
+          "name": "gcc-release"
+        },
+        {
+          "type": "test",
           "name": "gcc-release"
         }
       ]
