@@ -16,15 +16,18 @@ jobs:
       
     - name: Build Docker Image
       run: docker build -t dev-container -f .devcontainer/Dockerfile .      
-      
-    - name: Configure Project
-      run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container make release-configure
-      
-    - name: Compile Project
-      run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container make release-build
 
-    - name: Static Analysis
-      run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container make analyse
+    - name: Configure and Build with CMake Preset
+      run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container cmake --workflow --preset=ci-workflow
+                
+    #- name: Configure Project
+    #  run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container make release-configure
+      
+    #- name: Compile Project
+    #  run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container make release-build
+
+    #- name: Static Analysis
+    #  run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container make analyse
       
     #- name: Unit Tests
     #  run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container make test

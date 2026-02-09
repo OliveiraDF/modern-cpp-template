@@ -1,0 +1,107 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 31,
+        "patch": 6
+    },
+  "configurePresets": [
+    {
+        "name": "base",
+        "hidden": true,
+        "binaryDir": "${sourceDir}/build/${presetName}",
+        "installDir": "${sourceDir}/install/${presetName}",
+        "cacheVariables": {
+          "CMAKE_CXX_EXTENSIONS": "OFF",
+          "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+        }
+    },
+    {
+      "name": "msvc-base",
+      "inherits": "base",
+      "hidden": true,
+      "generator": "Visual Studio 18 2026",
+      "cacheVariables": {
+          "CMAKE_CXX_COMPILER": "cl",
+          "CMAKE_C_COMPILER": "cl",
+          "CMAKE_GENERATOR_PLATFORM": "x64"
+      }
+    },
+    {
+      "name": "gcc-base",
+      "inherits": "base",
+      "hidden": true,
+      "generator": "Unix Makefiles",
+      "cacheVariables": {
+          "CMAKE_CXX_COMPILER": "g++",
+          "CMAKE_C_COMPILER": "gcc"
+      }
+    },
+    {
+      "name": "msvc-release",
+      "displayName": "MSVC Release",
+      "inherits": "msvc-base",
+      "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "msvc-debug",
+      "displayName": "MSVC Debug",
+      "inherits": "msvc-base",
+      "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "gcc-release",
+      "displayName": "GCC Release",
+      "inherits": "gcc-base",
+      "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "gcc-debug",
+      "displayName": "GCC Debug",
+      "inherits": "gcc-base",
+      "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "msvc-release",
+      "configurePreset": "msvc-release"
+    },
+    {
+      "name": "msvc-debug",
+      "configurePreset": "msvc-debug"
+    },
+    {
+      "name": "gcc-release",
+      "configurePreset": "gcc-release"
+    },
+    {
+      "name": "gcc-debug",
+      "configurePreset": "gcc-debug"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "ci-workflow",
+      "displayName": "CI Workflow",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "gcc-release"
+        },
+        {
+          "type": "build",
+          "name": "gcc-release"
+        }
+      ]
+    }    
+  ]
+}
