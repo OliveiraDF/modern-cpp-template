@@ -125,8 +125,38 @@
         "outputOnFailure": true
       }
     }
+  ], 
+  "packagePresets": [
+    {
+      "name": "msvc-release-package",
+      "displayName": "MSVC Release Package",
+      "configurePreset": "msvc-release",
+      "vendor": {
+        "msi": {
+          "packageName": "${PROJECT_NAME}-${version}",
+          "upgradeCode": "{YOUR-UPGRADE-GUID-HERE}"
+        }
+      }
+    },
+    {
+      "name": "gcc-release",
+      "displayName": "GCC Release Package",
+      "configurePreset": "gcc-release",
+      "vendor": {
+        "deb": {
+          "packageName": "${PROJECT_NAME}",
+          "maintainer": "${PROJECT_MAINTENER}",
+          "description": "${PROJECT_DESCRIPTION}"
+        },
+        "rpm": {
+          "packageName": "${PROJECT_NAME}",
+          "vendor": "${PROJECT_VENDOR}",
+          "summary": "${PROJECT_DESCRIPTION}"
+        }
+      }
+    }
   ],
-  "workflowPresets": [
+   "workflowPresets": [
     {
       "name": "ci-workflow",
       "displayName": "CI Workflow",
@@ -142,8 +172,12 @@
         {
           "type": "test",
           "name": "gcc-release"
+        },
+        {
+          "type": "package",
+          "name": "gcc-release"
         }
       ]
-    }    
+    }
   ]
 }
