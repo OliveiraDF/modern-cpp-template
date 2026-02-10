@@ -1,24 +1,25 @@
-name: C/C++ CI with Docker
+name: CI
 
 on:
-  push:
-    branches: [ "main" ]
+
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  build-and-analyze:
+
+  build:
+
     runs-on: ubuntu-latest
     
     steps:
+
     - name: Checkout Repository
       uses: actions/checkout@v4
       
     - name: Build Docker Image
       run: docker build -t dev-container -f .devcontainer/Dockerfile .      
-
-    #- name: Configure and Build with CMake Preset
-    #  run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container cmake --workflow --preset=ci-workflow
                 
     - name: Configure Project
       run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container cmake --preset=gcc-release
@@ -32,14 +33,12 @@ jobs:
     - name: Unit Tests
       run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container ctest --preset=gcc-release
 
-    #- name: Package Application (.deb)
-    #  run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container make release-pack
+    - name: Package Application (.deb)
+      run: docker run --rm -u 0:0 -v ${{ github.workspace }}:/workspace -w /workspace dev-container cpack --preset=gcc-release
 
-    #- name: Upload DEB Artifact
-    #  uses: actions/upload-artifact@v4
-    #  with:
-    #    name: release-package-deb
-        # On récupère tous les fichiers .deb trouvés dans le dossier release
-    #    path: build/release/*.deb
-        # Optionnel : permet de garder l'artifact 7 jours au lieu de 90
-    #    retention-days: 7
+    - name: Upload DEB Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-package-deb
+        path: build/gcc-release/*.deb
+        retention-days: 7

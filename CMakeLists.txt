@@ -23,7 +23,6 @@ endif()
 
 include(cmake/uncrustify.cmake)
 include(cmake/cppcheck.cmake)
-include(cmake/package.cmake)
 
 project(${PROJECT_NAME} 
 	LANGUAGES CXX
@@ -39,3 +38,5 @@ add_subdirectory(tests)
 install(TARGETS ${PROJECT_NAME}-app
     RUNTIME DESTINATION bin
 )
+
+include(cmake/package.cmake)
