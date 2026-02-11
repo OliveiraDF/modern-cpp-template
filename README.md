@@ -141,13 +141,13 @@ Pour l'instant, ce projet est maintenu uniquement par OliveiraDF. Les contributi
 
 ## FAQ
 
-**Q: Comment ajouter des dépendances ?**
+**Q: Comment ajouter des dépendances ?**  
 R: Modifiez le fichier CMakeLists.txt et ajoutez vos dépendances via `find_package()` ou `add_subdirectory()`.
 
-**Q: Comment exécuter les tests ?**
+**Q: Comment exécuter les tests ?**  
 R: Utilisez `ctest --preset gcc-debug` ou `ctest --preset gcc-release` pour exécuter les tests.
 
-**Q: Comment analyser la qualité du code ?**
+**Q: Comment analyser la qualité du code ?**  
 R: Utilisez `cppcheck` pour l'analyse statique et `valgrind` pour détecter les fuites mémoire.
 
 ## Licence
