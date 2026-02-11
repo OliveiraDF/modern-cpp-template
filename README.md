@@ -25,7 +25,6 @@ La toolchain inclut les outils suivants avec leurs versions :
 - **doxygen** : 1.9.8 (génération de documentation)
 - **uncrustify** : 0.78.1 (formatage de code)
 - **cmake** : 3.31.6 (système de build)
-- **make** : 4.4.1 (outil de build)
 
 Le template inclut également :
 - Un workflow GitHub Actions CI/CD prêt à l'emploi (fichier `.github/workflows/c-cpp.yml`)
@@ -146,7 +145,7 @@ Pour l'instant, ce projet est maintenu uniquement par OliveiraDF. Les contributi
 R: Modifiez le fichier CMakeLists.txt et ajoutez vos dépendances via `find_package()` ou `add_subdirectory()`.
 
 **Q: Comment exécuter les tests ?**
-R: Utilisez `make test` dans le répertoire de build.
+R: Utilisez `ctest --preset gcc-debug` ou `ctest --preset gcc-release` pour exécuter les tests.
 
 **Q: Comment analyser la qualité du code ?**
 R: Utilisez `cppcheck` pour l'analyse statique et `valgrind` pour détecter les fuites mémoire.
