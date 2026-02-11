@@ -59,29 +59,81 @@ Pour utiliser ce template, vous avez besoin de :
 ## Utilisation
 
 Une fois dans le container :
-- Le projet est configuré avec CMake
-- Utilisez `make` pour compiler
+- Le projet est configuré avec CMake et utilise des presets modernes
+- Utilisez `cmake --preset` pour configurer et construire
 - Les outils d'analyse (cppcheck, valgrind, etc.) sont disponibles
-- Les tests peuvent être exécutés avec la commande appropriée
+- Les tests peuvent être exécutés avec `ctest --preset`
 - Utilisez `doxygen` pour générer la documentation
 - Utilisez `uncrustify` pour formater le code selon les règles définies
 
-**Commandes utiles :**
+**Commandes utiles avec les presets CMake :**
+
+### Configuration et build
 ```bash
-# Générer le projet
-make configure
+# Configurer le projet en mode Debug (GCC)
+cmake --preset gcc-debug
 
-# Compiler le projet
-make build
+# Configurer le projet en mode Release (GCC)
+cmake --preset gcc-release
 
-# Exécuter les tests
-make test
+# Configurer le projet en mode Debug (MSVC/Windows)
+cmake --preset msvc-debug
 
-# Analyser le code avec cppcheck
-make analyse
+# Configurer le projet en mode Release (MSVC/Windows)
+cmake --preset msvc-release
 
-# Formater le code avec uncrustify
-make format
+# Construire le projet (après configuration)
+cmake --build --preset gcc-debug
+cmake --build --preset gcc-release
+```
+
+### Exécution des tests
+```bash
+# Exécuter les tests en mode Debug
+ctest --preset gcc-debug
+
+# Exécuter les tests en mode Release
+ctest --preset gcc-release
+
+# Exécuter les tests avec plus de détails
+ctest --preset gcc-debug --verbose
+```
+
+### Analyse de code
+```bash
+# Exécuter l'analyse statique avec cppcheck
+cmake --build --preset gcc-debug --target analyse
+cmake --build --preset gcc-release --target analyse
+```
+
+### Packaging
+```bash
+# Générer un package DEB/RPM (Linux)
+cpack --preset gcc-release
+
+# Générer un package MSI (Windows)
+cpack --preset msvc-release
+
+# Générer un package simple (TGZ)
+cpack --preset gcc-release -G TGZ
+```
+
+### Workflow complet
+```bash
+# Exécuter le workflow CI complet (configuration, build, tests, packaging)
+cmake --workflow --preset ci-workflow
+```
+
+### Autres commandes utiles
+```bash
+# Nettoyer le build
+cmake --build --preset gcc-debug --target clean
+
+# Voir la liste des cibles disponibles
+cmake --build --preset gcc-debug --target help
+
+# Exécuter une cible spécifique
+cmake --build --preset gcc-debug --target nom_de_la_cible
 ```
 
 ## Contribution
