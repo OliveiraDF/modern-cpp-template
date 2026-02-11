@@ -23,6 +23,7 @@ endif()
 
 include(cmake/uncrustify.cmake)
 include(cmake/cppcheck.cmake)
+include(cmake/clear.cmake)
 
 project(${PROJECT_NAME} 
 	LANGUAGES CXX
