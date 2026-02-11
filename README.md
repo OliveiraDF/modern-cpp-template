@@ -25,6 +25,7 @@ La toolchain inclut les outils suivants avec leurs versions :
 - **doxygen** : 1.9.8 (génération de documentation)
 - **uncrustify** : 0.78.1 (formatage de code)
 - **cmake** : 3.31.6 (système de build)
+- **boost** : 1.83.0 (bibliothèques C++)
 
 Le template inclut également :
 - Un workflow GitHub Actions CI/CD prêt à l'emploi (fichier `.github/workflows/c-cpp.yml`)
@@ -41,7 +42,7 @@ Pour utiliser ce template, vous avez besoin de :
 - **VSCode** avec l'extension **Dev Containers** (ou **VSCodium** avec **DevPod**)
 - **Docker** installé et fonctionnel sur votre machine
 - **Git** pour le contrôle de version
-- **Compilateur C++** (g++ ou clang++) pour le développement local (optionnel)
+- **Compilateur C++** g++ pour le développement local (optionnel)
 
 **Recommandations supplémentaires :**
 - **Extension C/C++** pour VSCode/Codium pour une meilleure expérience de développement
@@ -126,10 +127,7 @@ cmake --workflow --preset ci-workflow
 ### Autres commandes utiles
 ```bash
 # Nettoyer le build
-cmake --build --preset gcc-debug --target clean
-
-# Voir la liste des cibles disponibles
-cmake --build --preset gcc-debug --target help
+cmake --build --preset gcc-debug --target clear
 
 # Exécuter une cible spécifique
 cmake --build --preset gcc-debug --target nom_de_la_cible
