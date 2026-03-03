@@ -28,7 +28,8 @@
   // ============================================
   // MONTAGE DE VOLUMES
   // ============================================
-  "mounts": ["source=${localWorkspaceFolder},target=/workspace,type=bind"],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
 
   // ============================================
   // UTILISATEUR
